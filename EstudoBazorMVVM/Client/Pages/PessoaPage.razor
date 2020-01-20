@@ -1,0 +1,55 @@
+﻿@page "/pessoapage"
+@inject IPessoasViewModel vm
+<h3>Lista de Pessoas</h3>
+
+
+<div>
+    <a href="criarpessoa" class="btn btn-success">Nova Pessoa</a>
+</div>
+
+<br/>
+
+<div>
+    @if (vm.ListaPessoas == null)
+    {
+        <p>Carregando. . . </p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Peso</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itm in vm.ListaPessoas)
+                {
+                    <tr>
+                        <td>@itm.Id</td>
+                        <td>@itm.Nome</td>
+                        <td>@itm.Peso</td>
+                        <td>
+                        <a href="editarpessoa/@itm.Id" class="btn btn-success">Editar Pessoa</a>
+                        <button class="btn btn-danger" @onclick="@(() => vm.ExcluirPessoa(itm.Id))">
+                            Excluir
+                        </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code{
+
+    protected override async Task OnInitializedAsync()
+    {
+        await vm.GetListaPessoas();
+    }
+}

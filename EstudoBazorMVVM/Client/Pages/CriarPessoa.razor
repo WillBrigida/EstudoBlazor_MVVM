@@ -1,0 +1,18 @@
+﻿@page "/criarpessoa"
+@inject ICriarPessoa vm
+@inject NavigationManager navigation
+@inject HttpClient http
+
+
+<h3>Nova Pessoa</h3>
+
+<br/>
+
+<FormPessoa 
+    Pessoa="@vm.Pessoa" 
+    ButtonText="Incluir" 
+    OnValidSubmit="@vm.CriarPessoa"/>
+
+@code {
+
+}

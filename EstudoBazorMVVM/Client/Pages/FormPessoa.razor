@@ -1,0 +1,20 @@
+
+<EditForm Model="@Pessoa" OnValidSubmit="@OnValidSubmit">
+    <div class="form-group" >
+        <label>Nome</label>
+        <InputText @bind-Value="@Pessoa.Nome"></InputText>
+    </div>
+
+    <div form-group>
+        <label>Peso</label>
+        <InputNumber @bind-Value="@Pessoa.Peso" ></InputNumber>
+    </div>
+
+    <button type="submit" class="btn btn-primary">@ButtonText</button>
+</EditForm>
+
+@code{
+    [Parameter]public EstudoBazorMVVM.Shared.Models.Pessoa Pessoa { get; set; }
+    [Parameter]public string ButtonText { get; set; }
+    [Parameter]public EventCallback OnValidSubmit { get; set; }
+}

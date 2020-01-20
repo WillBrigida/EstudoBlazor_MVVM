@@ -1,0 +1,23 @@
+﻿@page "/editarpessoa/{Id:int}"
+@inject IEditarPessoa vm
+@inject HttpClient http
+
+<h3>Editar Pessoa</h3>
+
+<br />
+
+<FormPessoa Pessoa="@vm.Pessoa"
+            ButtonText="Editar"
+            OnValidSubmit="@vm.EditarPessoa" />
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    protected override async Task OnParametersSetAsync()
+    {
+        vm.Pessoa = await http.GetJsonAsync<Pessoa>($"api/pessoa/{Id}");
+    }
+}
+
+
